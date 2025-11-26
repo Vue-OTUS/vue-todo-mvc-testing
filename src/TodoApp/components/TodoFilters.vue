@@ -1,20 +1,31 @@
 <template>
-  <footer class="footer" style="">
-    <span class="todo-count"><strong>2</strong> items left </span>
+  <footer class="footer">
+    <span class="todo-count">
+      <strong>{{ todoStore.leftItems }}</strong> items left
+    </span>
     <ul class="filters">
       <li>
-        <a
-          aria-current="page"
-          href="#/"
-          class="router-link-active router-link-exact-active selected"
-          >All</a
-        >
+        <router-link :to="{ name: TodoFilter.All }">All</router-link>
       </li>
-      <li><a href="#/active" class="">Active</a></li>
-      <li><a href="#/completed" class="">Completed</a></li>
+      <li>
+        <router-link :to="{ name: TodoFilter.Active }">Active</router-link>
+      </li>
+      <li>
+        <router-link :to="{ name: TodoFilter.Completed }">Completed</router-link>
+      </li>
     </ul>
-    <button class="clear-completed" style="display: none">Clear Completed</button>
+    <button
+      class="clear-completed"
+      @click="todoStore.clearCompleted()"
+    >
+      Clear Completed
+    </button>
   </footer>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useTodoStore } from '@/stores/todos'
+import { TodoFilter } from '../types'
+
+const todoStore = useTodoStore()
+</script>

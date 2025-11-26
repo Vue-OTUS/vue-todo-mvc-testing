@@ -1,6 +1,10 @@
 <template>
   <div class="toggle-all-container">
-    <input type="checkbox" id="toggle-all-input" class="toggle-all" /><label
+    <input
+      type="checkbox"
+      id="toggle-all-input"
+      class="toggle-all"
+    /><label
       class="toggle-all-label"
       for="toggle-all-input"
     >

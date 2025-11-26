@@ -301,7 +301,7 @@ body {
 .filters li a:hover {
   border-color: #db7676;
 }
-.filters li a.selected {
+.filters li a.router-link-active {
   border-color: #ce4646;
 }
 .clear-completed,
