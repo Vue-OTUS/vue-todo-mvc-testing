@@ -16,7 +16,7 @@ export const useTodoStore = defineStore('todo', () => {
   function removeTodo(id: TodoId) {
     const index = todos.findIndex((t) => t.id === id)
 
-    if (!index) {
+    if (index === -1) {
       return
     }
 

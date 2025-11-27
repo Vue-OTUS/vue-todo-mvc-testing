@@ -7,12 +7,14 @@
       <input
         type="checkbox"
         class="toggle"
+        data-test-id="toggleCheckbox"
         :checked="todo.isCompleted"
         @input="toggle"
       />
       <label>{{ todo.title }}</label>
       <button
         class="destroy"
+        data-test-id="destroyBtn"
         @click="todoStore.removeTodo(todo.id)"
       ></button>
     </div>
