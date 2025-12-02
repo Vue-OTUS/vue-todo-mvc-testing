@@ -1,13 +1,8 @@
-import { beforeEach, describe, expect, it, test } from 'vitest'
+import { beforeAll, beforeEach, describe, expect, it, test } from 'vitest'
 import { useTodoStore } from '../todos'
-import { createPinia, setActivePinia } from 'pinia'
 import { getTodo } from 'tests/providers/todo'
 
 describe('Todo Pinia Store', () => {
-  beforeEach(() => {
-    setActivePinia(createPinia())
-  })
-
   describe('addTodo', () => {
     it('should add todo', () => {
       const store = useTodoStore()

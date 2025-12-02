@@ -13,4 +13,9 @@ export default defineConfig({
       tests: fileURLToPath(new URL('./tests', import.meta.url)),
     },
   },
+  server: {
+    watch: {
+      ignored: ['**/playwright-report/*'],
+    },
+  },
 })

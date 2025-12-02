@@ -3,17 +3,12 @@ import { describe, it, expect, beforeEach, type Mock, vi } from 'vitest'
 import TodoApp from '../TodoApp.vue'
 import router from '@/router/index'
 import { TodoFilter, type Todo } from '../types'
-import { setActivePinia, createPinia } from 'pinia'
 import { useTodoStore } from '@/stores/todos'
 import { getTodo } from 'tests/providers/todo'
 import { loadTodos } from '@/services/loadTodos'
 import { nextTick } from 'vue'
 
 describe('TodoApp', () => {
-  beforeEach(() => {
-    setActivePinia(createPinia())
-  })
-
   it('should display todos', async () => {
     router.push({ name: TodoFilter.All })
     await router.isReady()

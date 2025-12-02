@@ -8,11 +8,10 @@ function sum(a: number, b: number) {
 }
 
 describe('Calculator', () => {
-  it('sum is correct', () => {
-    const a = 1
-    const b = 2
-    const expected = 3
-
+  it.each([
+    [1, 2, 3],
+    [-1, -2, -3],
+  ])('sum is correct %s %s %s', (a, b, expected) => {
     const actual = sum(a, b)
 
     expect(actual).toBe(expected)

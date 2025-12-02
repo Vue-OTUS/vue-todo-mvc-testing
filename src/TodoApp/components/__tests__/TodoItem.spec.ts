@@ -2,13 +2,8 @@ import { mount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, test } from 'vitest'
 import TodoItem from '../TodoItem.vue'
 import { getTodo } from 'tests/providers/todo'
-import { setActivePinia, createPinia } from 'pinia'
 
 describe('TodoItem component', () => {
-  beforeEach(() => {
-    setActivePinia(createPinia())
-  })
-
   it('should display todo text', () => {
     const wrapper = mount(TodoItem, {
       props: {
