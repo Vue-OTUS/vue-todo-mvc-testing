@@ -8,12 +8,12 @@
         type="checkbox"
         class="toggle"
         :checked="todo.isCompleted"
-        @input="toggle"
+        @input="$emit('toggle', !todo.isCompleted)"
       />
       <label>{{ todo.title }}</label>
       <button
         class="destroy"
-        @click="todoStore.removeTodo(todo.id)"
+        @click="$emit('remove-todo')"
       ></button>
     </div>
     <div class="input-container">
@@ -39,23 +39,21 @@
 <script setup lang="ts">
 import { nextTick, ref, useId, useTemplateRef } from 'vue'
 import type { Todo } from '../types'
-import { useTodoStore } from '@/stores/todos'
 
 const id = useId()
 
 const props = defineProps<{ todo: Todo }>()
-
-const todoStore = useTodoStore()
+const emit = defineEmits<{
+  (e: 'toggle', payload: boolean): void
+  (e: 'remove-todo'): void
+  (e: 'update-title', payload: string): void
+}>()
 
 const isEditing = ref(false)
 
 const text = ref(props.todo.title)
 
 const inputEl = useTemplateRef('input')
-
-function toggle() {
-  todoStore.setIsCompleted(props.todo.id, !props.todo.isCompleted)
-}
 
 function startEditing() {
   isEditing.value = true
@@ -69,6 +67,6 @@ function stopEditing() {
 
 function saveTitle() {
   isEditing.value = false
-  todoStore.updateTitle(props.todo.id, text.value)
+  emit('update-title', text.value)
 }
 </script>
