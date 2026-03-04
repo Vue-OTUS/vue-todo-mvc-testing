@@ -12,6 +12,7 @@
       />
       <label>{{ todo.title }}</label>
       <button
+        data-testid="delete-todo-button"
         class="destroy"
         @click="$emit('remove-todo')"
       ></button>

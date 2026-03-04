@@ -3,6 +3,7 @@
     <h1>todos</h1>
     <input
       v-model="text"
+      data-testid="todo-input"
       type="text"
       class="new-todo"
       autocomplete="off"
