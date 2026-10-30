@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { getTodo } from '../components/__tests__/todoItemGenerator'
 import { useTodoStore } from '../../stores/todos'
@@ -9,14 +9,9 @@ import { routes } from '../../router/index.ts'
 import TodoItem from '../components/TodoItem.vue'
 import { TodoFilter } from '../types.ts'
 
-describe('TodoApp', () => {
-  beforeEach(() => {
-    // creates a fresh pinia and makes it active
-    // so it's automatically picked up by any useStore() call
-    // without having to pass it to it: `useStore(pinia)`
-    setActivePinia(createPinia())
-  })
+import { loadTodos } from '../../services/loadTodos.ts'
 
+describe('TodoApp', () => {
   it('renders all todos', async () => {
     const store = useTodoStore()
     const todo1 = getTodo({ isCompleted: true })
@@ -59,6 +54,32 @@ describe('TodoApp', () => {
     })
 
     expect(wrapper.findAllComponents(TodoItem)).toHaveLength(1)
+  })
+
+  it('renders loaded todos', async () => {
+    vi.mock(import('../../services/loadTodos.ts'), () => {
+      return {
+        loadTodos: vi.fn().mockResolvedValue([getTodo({ title: 'my todo' })]),
+      }
+    })
+
+    const router = getRouter()
+
+    router.push({ name: TodoFilter.All })
+    await router.isReady()
+
+    const wrapper = mount(TodoApp, {
+      global: {
+        plugins: [router],
+      },
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(loadTodos).toHaveBeenCalled()
+
+    expect(wrapper.findAllComponents(TodoItem)).toHaveLength(1)
+    expect(wrapper.text()).toContain('my todo')
   })
 })
 

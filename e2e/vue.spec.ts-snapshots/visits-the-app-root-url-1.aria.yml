@@ -1,0 +1,24 @@
+- heading "todos" [level=1]
+- textbox "What needs to be done?"
+- main:
+  - checkbox "❯ Toggle All Input"
+  - text: ❯ Toggle All Input
+  - list:
+    - listitem:
+      - checkbox
+      - text: new todo Edit Todo Input
+- strong: "1"
+- text: items left
+- list:
+  - listitem:
+    - link "All":
+      - /url: /
+  - listitem:
+    - link "Active":
+      - /url: /active
+  - listitem:
+    - link "Completed":
+      - /url: /completed
+- button "Clear Completed"
+- img
+- img
